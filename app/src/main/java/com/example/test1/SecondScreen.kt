@@ -17,7 +17,7 @@ class SecondScreen : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedName = result.data?.getStringExtra("EXTRA_SELECTED_USER_NAME")
-            binding.selectedUserNameTextView.text = selectedName
+            binding.selectedUserNameTextView.text = selectedName ?: "John Doe"
         }
     }
 
@@ -26,18 +26,21 @@ class SecondScreen : AppCompatActivity() {
         binding = ActivitySecondScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Add a back button to the action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = "Second Screen"
 
-        val name = intent.getStringExtra("EXTRA_USER_NAME")
+        val name = intent.getStringExtra("EXTRA_USER_NAME") ?: "John Doe"
         binding.nameTextView.text = name
+//
+//        // Set default selected name to John Doe
+//        binding.selectedUserNameTextView.text = "John Doe"
 
         binding.chooseUserButton.setOnClickListener {
             val intent = Intent(this, ThirdScreen::class.java)
             resultLauncher.launch(intent)
         }
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         finish()

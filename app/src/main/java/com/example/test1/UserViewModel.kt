@@ -51,7 +51,7 @@ class UserViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = ApiClient.apiService.getUsers(page = currentPage, perPage = 10)
+                val response = ApiClient.apiService.getUsers(page = currentPage, perPage = 6)
                 if (response.isSuccessful) {
                     val body = response.body()
                     val newUsers = body?.data ?: emptyList()
